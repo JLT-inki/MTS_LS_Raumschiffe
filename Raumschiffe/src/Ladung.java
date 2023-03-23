@@ -1,19 +1,33 @@
 public class Ladung
 {
-	// Attribute
 	private String bezeichnung;
 	private int menge;
 	
-	//Konstruktoren
+	/**
+	 * Parameterloser Kosntruktor der Klasse Ladung
+	 */
 	public Ladung() {}
 	
+	/**
+	 * Vollparamterisierter Konstruktor der Klasse Ladung
+	 * @param bezeichnung
+	 * @param menge
+	 */
 	public Ladung(String bezeichnung, int menge)
 	{
 		setBezeichnung(bezeichnung);
 		setMenge(menge);
 	}
 	
-	// Setter und Getter nach Attributen sortiert
+	/**
+	 * Methode, die die eindeutige Kennung eines Objekt der Klasse Ladung als String zurueckgibt
+	 * @return String, der alle Attribute einer Ladung enthaelt
+	 */
+	public String toString()
+	{
+		return("\tBezeichnung: " + getBezeichnung() + " (Menge: " + getMenge() + ")");
+	}
+	
 	public void setBezeichnung(String bezeichnung)
 	{
 		this.bezeichnung = bezeichnung;
@@ -30,11 +44,5 @@ public class Ladung
 	public int getMenge()
 	{
 		return this.menge;
-	}
-	
-	// Methode, die alle Attribute der Ladung als einen String zurueckgibt
-	public String toString()
-	{
-		return("Bezeichnung: " + getBezeichnung() + "\nMenge: " + getMenge());
 	}
 }

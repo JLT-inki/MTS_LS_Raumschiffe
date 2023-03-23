@@ -3,7 +3,6 @@ import java.util.Random;
 
 public class Raumschiff
 {
-	// Attribute
 	private int photonentorpedoAnzahl;
 	private int energieversorgungInProzent;
 	private int schildeInProzent;
@@ -14,9 +13,22 @@ public class Raumschiff
 	private static ArrayList<String> broadcastKummunikator = new ArrayList<String>();
 	private ArrayList<Ladung> ladungsverzeichnis = new ArrayList<Ladung>();
 	
-	// Konstruktoren
+	/**
+	 * Parameterloser Konstruktor der Klasse Raumschiff
+	 */
 	public Raumschiff() {}
 	
+	/**
+	 * Vollparametrisierter Konstruktor der Klasse Raumschiff
+	 * @param photonentorpedoAnzahl
+	 * @param energieversorgungInProzent
+	 * @param schildeInProzent
+	 * @param huelleInProzent
+	 * @param lebenserhaltungssystemeInProzent
+	 * @param schiffsname
+	 * @param androidenAnzahl
+	 * @param ladungsverzeichnis
+	 */
 	public Raumschiff(int photonentorpedoAnzahl, int energieversorgungInProzent, int schildeInProzent, int huelleInProzent, int lebenserhaltungssystemeInProzent, String schiffsname, int androidenAnzahl, ArrayList<Ladung> ladungsverzeichnis)
 	{
 		setPhotonentorpedoAnzahl(photonentorpedoAnzahl);
@@ -29,33 +41,50 @@ public class Raumschiff
 		setLadungsverzeichnis(ladungsverzeichnis);
 	}
 	
-	// Methode, welche eine einzelne Ladung hinzufügt
+	/**
+	 * Methode, die ein Objekt der Klasse Ladung zum Attribut ladungsverzeichnis
+	 * eines Objekts der Klasse Raumschiff hinzufuegt
+	 * @param neueLadung
+	 */
 	public void addLadung(Ladung neueLadung)
 	{
 		this.ladungsverzeichnis.add(neueLadung);
 	}
 	
-	// Methode, die alle Zustaende des Raumschiffs auf der Konsole ausgibt
+	/**
+	 * Methode, die den Zustand eines Raumschiffs auf der Konsole ausgibt
+	 */
 	public void zustandRaumschiff()
 	{
-		System.out.println("Anzahl Photonentorpedos: " + getPhotonentorpedoAnzahl());
-		System.out.println("Energieversorgung (in %): " + getEnergieversorgungInProzent());
-		System.out.println("Schilde (in %): " + getSchildeInProzent());
-		System.out.println("Huelle (in %): " + getHuelleInProzent());
-		System.out.println("Lebenserhaltungssysteme (in %): " + getLebenserhaltungssystemeInProzent());
-		System.out.println("Anzahl Androiden: " + getAndroidenAnzahl());
+		System.out.println("Name: " + getSchiffsname());
+		System.out.println("\tAnzahl Photonentorpedos: " + getPhotonentorpedoAnzahl());
+		System.out.println("\tEnergieversorgung (in %): " + getEnergieversorgungInProzent());
+		System.out.println("\tSchilde (in %): " + getSchildeInProzent());
+		System.out.println("\tHuelle (in %): " + getHuelleInProzent());
+		System.out.println("\tLebenserhaltungssysteme (in %): " + getLebenserhaltungssystemeInProzent());
+		System.out.println("\tAnzahl Androiden: " + getAndroidenAnzahl() + "\n");
 	}
 	
-	//Methode, die alle Ladungen eines Raumschiffs auf der Konsole ausgibt
+	/**
+	 * Methode, die das Attribut ladungsverezeichnis auf der Konsole ausgibt
+	 */
 	public void ladungsverzeichnisAusgeben()
 	{
+		System.out.println("Ladung des Schiffs " + getSchiffsname() + ":");
+		
 		for(Ladung l: getLadungsverzeichnis())
 		{
 			System.out.println(l.toString());
 		}
+		
+		System.out.println();
 	}
 	
-	// Methode, die einen Photonentorpedo (falls vorhanden) abschiesst
+	/**
+	 * Methode, mit welcher ein Objekt der Klasse Raumschiff auf ein anderes Objekt
+	 * der Klasse Raumschiff mit Photonentorpedos schiesst.
+	 * @param ziel
+	 */
 	public void photonentorpedoSchiessen(Raumschiff ziel)
 	{
 		if(getPhotonentorpedoAnzahl() <= 0)
@@ -70,7 +99,11 @@ public class Raumschiff
 		}
 	}
 	
-	//Methde, mit welcher die Phaserkanone abgeschossen wird
+	/**
+	 * Methode, mit welcher ein Objekt der Klasse Raumschiff auf ein anderes Objekt
+	 * der Klasse Raumschiff mit der Phaserkanone schiesst.
+	 * @param ziel
+	 */
 	public void phaserkanoneSchiessen(Raumschiff ziel)
 	{
 		if(getEnergieversorgungInProzent() < 50)
@@ -85,7 +118,12 @@ public class Raumschiff
 		}
 	}
 	
-	// Methode, die Treffer vermerkt
+	/**
+	 * Methode, mit welcher ein Objekt der Klasse Raumschiff einen Treffer durch die
+	 * Phaserkanone oder die Photonentorpedos eines anderen Objekts der Klasse
+	 * Raumschiff vermerkt
+	 * @param ziel
+	 */
 	private void treffer(Raumschiff ziel)
 	{
 		nachrichtAnAlle(ziel.getSchiffsname() + " wurde getroffen!");
@@ -119,13 +157,22 @@ public class Raumschiff
 		}
 	}
 	
-	// Methode, die Nachrichten im Broadcastkommunikator speichert
+	/**
+	 * Methode, die einen String zum statischen Attribut broadcastKommunikator der
+	 * Klasse Raumschiff hinzufuegt
+	 * @param message
+	 */
 	public void nachrichtAnAlle(String message)
 	{
 		Raumschiff.broadcastKummunikator.add(message);
 	}
 	
-	// Methode, die Photonentorpedos einsetzt
+	/**
+	 * Methode, die ueberprueft, ob im Ladungsverzeichnis eines Objekts der Klasse Raumschiff
+	 * eine Ladung mit dem Namen "Photonentorpedo" enthalten ist.
+	 * Ist dies der Fall werden diese zu den Photonentorpedos dieses Objektes hinzugefuegt
+	 * @param anzahlPhotonentorpedos
+	 */
 	public void photonentorpedosEinsetzen(int anzahlPhotonentorpedos)
 	{
 		boolean geladen = false;
@@ -145,18 +192,22 @@ public class Raumschiff
 				l.setMenge(l.getMenge()-einzusetzendePhotonentorpedos);
 				setPhotonentorpedoAnzahl(getPhotonentorpedoAnzahl() + einzusetzendePhotonentorpedos);
 				
-				System.out.println(einzusetzendePhotonentorpedos + " Photonentorpedo(s) eingesetzt");
+				System.out.println(einzusetzendePhotonentorpedos + " Photonentorpedo(s) eingesetzt\n");
 			}
 		}
 		
 		if(geladen == false)
 		{
-			System.out.println("Keine Photonentorpedos gefunden!");
+			System.out.println("Keine Photonentorpedos gefunden!\n");
 			nachrichtAnAlle("-=*Click*=-");
 		}
 	}
 	
-	// Methode, die ueberprueft ob von einer Ladung 0 vorhanden sind und diese dann entfernt
+	/**
+	 * Methode, die ueberprueft, ob im Attribut ladungsverzeichnis eines Objekts der Klasse
+	 * Raumschiff ein Objekt der Klasse Ladung existiert, dessen Menge gleich 0 ist.
+	 * Is dies der Fall wird dieses Objekt der Klasse Ladung entfernt
+	 */
 	public void ladungsverzeichnisAufraeumen()
 	{
 		for(Ladung l: getLadungsverzeichnis())
@@ -164,11 +215,18 @@ public class Raumschiff
 			if(l.getMenge() == 0)
 			{
 				this.getLadungsverzeichnis().remove(l);
+				break;
 			}
 		}
 	}
 	
-	// Methode, die Reparaturen am Schiff durchfuerht
+	/**
+	 * Methode, mit welcher die Schiffstrukturen eines Objekts der Kalsse Raumschiff repariert werden
+	 * @param schutzschilde
+	 * @param energieversorgung
+	 * @param schiffshuelle
+	 * @param anzahlDroiden
+	 */
 	public void reparaturDurchfuehren(boolean schutzschilde, boolean energieversorgung, boolean schiffshuelle, int anzahlDroiden)
 	{
 		Random random = new Random();
@@ -197,7 +255,6 @@ public class Raumschiff
 		{
 			int reparatur = (int) random.nextInt(100) * benutzteDroiden / anzahlReparaturen;
 			
-			// Reparatur anwenden
 			if(schutzschilde == true)
 			{
 				setSchildeInProzent(getSchildeInProzent() + reparatur);
@@ -227,13 +284,16 @@ public class Raumschiff
 		}
 	}
 	
-	// Methode, die alle Logbucheintraege zurueckgibt
+	/**
+	 * Methode, die das statische Attribut broadcastKommunikator der Klasse Raumschiff
+	 * zurueckgibt
+	 * @return Den gesamnten Broadcastkommunikator der Klasse raumschiff
+	 */
 	public static ArrayList<String> eintraegeLogbuchZurueckgeben()
 	{
 		return broadcastKummunikator;
 	}
 	
-	// Setter und Getter nach Attributen gruppiert
 	public void setPhotonentorpedoAnzahl(int photonentorpedoAnzahl)
 	{
 		this.photonentorpedoAnzahl = photonentorpedoAnzahl;

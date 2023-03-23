@@ -23,7 +23,7 @@ public class RaumschiffMain
 		Raumschiff romulaner = new Raumschiff(2, 100, 100, 100, 100, "IRW Khazara", 2, ladungsverzeichnis_romularer);
 		Raumschiff vulkanier = new Raumschiff(0, 80, 80, 50, 100, "Ni'var", 5, ladungsverzeichnis_vulkanier);
 		
-		// Ladungen auf Raumschiffe packen, nach Raumschiffn sortiert
+		// Ladungen auf Raumschiffe packen, nach Raumschiffen sortiert
 		klingonen.addLadung(ladung1);
 		klingonen.addLadung(ladung5);
 		
@@ -34,15 +34,23 @@ public class RaumschiffMain
 		vulkanier.addLadung(ladung4);
 		vulkanier.addLadung(ladung7);
 		
+		// Quellcode verwenden
 		klingonen.photonentorpedoSchiessen(romulaner);
 		romulaner.phaserkanoneSchiessen(klingonen);
 		vulkanier.nachrichtAnAlle("Gewalt ist nicht logisch");
 		klingonen.zustandRaumschiff();
 		klingonen.ladungsverzeichnisAusgeben();
 		vulkanier.reparaturDurchfuehren(true, true, true, vulkanier.getAndroidenAnzahl());
-		vulkanier.ladungsverzeichnisAusgeben();
 		vulkanier.photonentorpedosEinsetzen(ladung7.getMenge());
 		vulkanier.ladungsverzeichnisAufraeumen();
+		klingonen.photonentorpedoSchiessen(romulaner);
+		klingonen.photonentorpedoSchiessen(romulaner);
+		
+		klingonen.zustandRaumschiff();
+		romulaner.zustandRaumschiff();
+		vulkanier.zustandRaumschiff();
+		klingonen.ladungsverzeichnisAusgeben();
+		romulaner.ladungsverzeichnisAusgeben();
 		vulkanier.ladungsverzeichnisAusgeben();
 		
 		System.out.println(Raumschiff.eintraegeLogbuchZurueckgeben());
